@@ -10,4 +10,6 @@ api.put('/:id', studentController.update);
 
 api.delete('/:id', studentController.eliminate);
 
+api.get('/getStudent/:id', studentController.getUserByID);
+
 module.exports = api;

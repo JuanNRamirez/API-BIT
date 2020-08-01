@@ -100,9 +100,32 @@ function eliminate(req, res) {
     });  
 }
 
+function getUserByID(req, res) {
+    var id = req.params.id;
+    Student.findById(id, (error, retrievedStudent) => {
+        if (error) {
+            res.status(500).send({
+                message: "Error connecting to the server"
+            });
+        } else {
+            if (!retrievedStudent) {
+                res.status(404).send({
+                    message: "Error retrieving user"
+                });
+            } else {
+                res.status(200).send({
+                    message: "User retrieved successfully",
+                    studentData: retrievedStudent
+                });
+            }
+        }
+    });
+}
+
 module.exports = {
     create,
     obtain,
     update,
-    eliminate
+    eliminate,
+    getUserByID
 }
